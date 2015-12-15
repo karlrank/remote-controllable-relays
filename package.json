@@ -1,0 +1,9 @@
+{
+  "name": "remote-controllable-relays",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "4.13.3",
+    "pi-spi": "1.0.1",
+    "rpi-gpio": "0.7.0"
+  }
+}
