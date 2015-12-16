@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Relay controller</title>
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <section class="authorized hidden">
+            <button class="run-playbook" data-playbook="driveway-on">Driveway on</button>
+            <button class="run-playbook" data-playbook="driveway-off">Driveway off</button>
+        </section>
+        <section class="unauthorized hidden">
+            <h1>Missing authorization!</h1>
+            <p>Press button to start the authorization process. After starting the process the authorize button must be pressed in 60s on the device.</p>
+            <button class="authorize">Authorize</button>
+        </section>
+    </div>
+    <div class="overlay hidden">
+        <img src="img/loader.svg">
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

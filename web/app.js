@@ -15,6 +15,8 @@ module.exports = {
             stream: outStream
         }));
 
+        app.use(express.static('public'));
+
         app.post('/get-token', function (req, res) {
             var done = false;
 
@@ -70,7 +72,7 @@ module.exports = {
             });
         });
 
-        app.put('/driveway-on', function (req, res) {
+        app.put('/playbook/driveway-on', function (req, res) {
             Promise.resolve().then(function () {
                 stateController.relayState.relayOn(1);
                 return Promise.resolve();
@@ -91,7 +93,7 @@ module.exports = {
             res.json({status: 'Done.'});
         });
 
-        app.put('/driveway-off', function (req, res) {
+        app.put('/playbook/driveway-off', function (req, res) {
             stateController.relayState.relayOff(1);
             stateController.relayState.relayOff(2);
             stateController.relayState.relayOff(3);
