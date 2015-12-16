@@ -18,5 +18,17 @@ module.exports = {
                 console.log('err', error.stack);
             });
         });
+    },
+
+    verifyToken: function (token) {
+        return new Promise(function(resolve, reject) {
+            db.tokens.get(token).then(function (row) {
+                if (row !== undefined) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            }).catch(reject);
+        });
     }
 };

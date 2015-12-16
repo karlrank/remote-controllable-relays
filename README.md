@@ -17,3 +17,6 @@ Possible package.json content for automatic rebuilding
 "rebuild-sqlite3": "cd node_modules/sqlite3 &amp;&amp; npm run prepublish &amp;&amp; node-gyp configure --module_name=node_sqlite3 --module_path=../lib/binding/node-v43-darwin-x64 &amp;&amp; node-gyp rebuild --target=0.27.1 --arch=x64 --target_platform=darwin --dist-url=https://atom.io/download/atom-shell --module_name=node_sqlite3 --module_path=../lib/binding/node-v43-darwin-x64"
 },
 ```
+
+# Running test using electron
+Run `electron .` in the root of the project.

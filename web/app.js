@@ -44,12 +44,33 @@ module.exports = {
 
 
         // This middleware only applies to the routes below this point
-        app.use(function (req, res, next) {
-            console.log('Middleware used here!');
-            next();
+        app.use(function (request, res, next) {
+
+            if (request.headers.authorization === undefined || typeof(request.headers.authorization) !== 'string' ||
+                !request.headers.authorization.startsWith('token ')) {
+                res.sendStatus(401);
+                return;
+            }
+
+            var token = request.headers.authorization.split(' ')[1];
+            if (token === undefined) {
+                res.sendStatus(401);
+                return;
+            }
+
+            Authentication.verifyToken(token).then(function (verificationResult) {
+                if (verificationResult) {
+                    next()
+                } else {
+                    res.status(500).send('Invalid token.');
+                }
+            }).catch(function (error) {
+                console.error('Error verifying token', error);
+                res.sendStatus(500);
+            });
         });
 
-        app.post('/driveway-on', function (req, res) {
+        app.put('/driveway-on', function (req, res) {
             Promise.resolve().then(function () {
                 stateController.relayState.relayOn(1);
                 return Promise.resolve();
@@ -67,14 +88,14 @@ module.exports = {
                 console.error('Error switching on driveway', error);
                 res.sendStatus(500);
             });
-            res.send('');
+            res.json({status: 'Done.'});
         });
 
-        app.post('/driveway-off', function (req, res) {
+        app.put('/driveway-off', function (req, res) {
             stateController.relayState.relayOff(1);
             stateController.relayState.relayOff(2);
             stateController.relayState.relayOff(3);
-            res.send('');
+            res.json({status: 'Done.'});
         });
 
         return app;
