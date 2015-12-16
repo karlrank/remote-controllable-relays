@@ -26,6 +26,13 @@ class RelayState {
         this.relays[relayNr] = false;
     }
 
+    setRelay (relayNr, state) {
+        if (this.relays[relayNr] === undefined) {
+            throw(Error(`Can not switch Relay nr ${relayNr} off. Relay number out of bounds.`));
+        }
+        this.relays[relayNr] = state;
+    }
+
     toggleRelay (relayNr) {
         "use strict";
         if (this.relays[relayNr] === undefined) {
@@ -34,7 +41,7 @@ class RelayState {
         this.relays[relayNr] = !this.relays[relayNr];
     }
 
-    relayState (relayNr) {
+    getRelayState (relayNr) {
         "use strict";
         if (this.relays[relayNr] === undefined) {
             throw(Error(`Can not read Relay nr ${relayNr} on. Relay number out of bounds.`));
@@ -53,6 +60,17 @@ class RelayState {
         });
 
         return numericState;
+    }
+
+    asArray () {
+        var booleanArray = [];
+        for (var i = 1;i <= this.count;i++) {
+            booleanArray.push({
+                nr: i,
+                state: this.relays[i]
+            });
+        }
+        return booleanArray;
     }
 }
 

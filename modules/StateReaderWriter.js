@@ -90,7 +90,7 @@ class StateReaderWriter extends EventEmitter {
                 return transfer(self.spi, relayData);
             }).then(function (data) {
                 writePin(self.IOOptions.switchCEPin, true);
-                self.switchState.load(data.readUInt8(0));
+                self.switchState.loadNumeric(data.readUInt8(0));
                 return writePin(self.IOOptions.relayLatchPin, true);
             }).then(function () {
                 return writePin(self.IOOptions.relayLatchPin, false);

@@ -28,21 +28,23 @@ class SwitchState extends EventEmitter {
         })
     }
 
-    load (numericState) {
-        var self = this;
-
-        //console.log('Numeric switch state', numericState.toString(2));
-
-        //console.log('sstate', (numericState).toString(2));
-
+    loadNumeric (numericState) {
+        var stateMap = {};
         Object.keys(this.switches).forEach(function(switchNr) {
-            let switchState = numericState & (1 << switchNr - 1) ? false : true;
-            if (switchState != self.switches[switchNr].state) {
-                self.deBounce(switchNr, switchState);
-            }
-            self.switches[switchNr].state = switchState;
-        });
+            stateMap[switchNr] = numericState & (1 << switchNr - 1) ? false : true;
 
+        });
+        this.load(stateMap);
+    }
+
+    load (stateMap) {
+        var self = this;
+        Object.keys(this.switches).forEach(function(switchNr) {
+            if (stateMap[switchNr] != self.switches[switchNr].state) {
+                self.deBounce(switchNr, stateMap[switchNr]);
+            }
+            self.switches[switchNr].state = stateMap[switchNr];
+        });
     }
 
     deBounce (switchNr, switchState) {
@@ -64,9 +66,20 @@ class SwitchState extends EventEmitter {
     getSwitchState (switchNr) {
         "use strict";
         if (this.switches[switchNr].state === undefined) {
-            throw(Error(`Can not read Switch nr ${switchNr} on. Relay number out of bounds.`));
+            throw(Error(`Can not read Switch nr ${switchNr} on. Switch number out of bounds.`));
         }
         return this.switches[switchNr].state;
+    }
+
+    asArray () {
+        var booleanArray = [];
+        for (var i = 1;i <= this.count;i++) {
+            booleanArray.push({
+                nr: i,
+                state: this.switches[i].state
+            });
+        }
+        return booleanArray;
     }
 }
 

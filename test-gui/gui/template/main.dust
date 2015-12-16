@@ -1,0 +1,16 @@
+
+
+<section class="switches">
+    {#switches}
+        <div class="switch off" data-nr="{nr}">
+            <div class="toggle-switch"><div class="button"></div></div>
+            <div class="push-button"><div class="button">S{nr}</div></div>
+            <div class="indicator"></div>
+        </div>
+    {/switches}
+</section>
+<section class="relays">
+    {#relays}
+        <div class="relay {?state}on{:else}off{/state}" data-nr="{nr}">R{nr}</div>
+    {/relays}
+</section>

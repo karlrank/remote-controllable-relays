@@ -1,0 +1,145 @@
+
+html, body , div.app-container {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+* {
+  position: relative;
+}
+
+
+div.app-container {
+  > section.switches, > section.relays {
+
+  }
+
+  > section.switches {
+    display: flex;
+    flex: 0 0 auto;
+    margin: 0.5rem;
+
+    > div.switch {
+      user-select: none;
+
+      &.on {
+        > div.toggle-switch {
+          > div.button {
+            background-color: #6495ED;
+            top: 0;
+          }
+        }
+
+        > div.indicator {
+          background-color: red;
+        }
+      }
+
+      &.off {
+        > div.toggle-switch {
+          > div.button {
+            background-color: #ADADAD;
+            top: calc(100% - 1rem);
+          }
+        }
+
+        > div.indicator {
+          background-color: gray;
+        }
+      }
+
+      > div.toggle-switch {
+        cursor: pointer;
+        width: 1rem;
+        height: 2.5rem;
+        border-radius: 1rem;
+        margin: 0.5rem;
+        background-color: #E4E4E4;
+        border: 1px solid gray;
+
+        > div.button {
+          position: absolute;
+          width: 1rem;
+          height: 1rem;
+          border-radius: 1rem;
+          transition: top 0.25s;
+        }
+      }
+
+      > div.push-button {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 2rem;
+        background-color: #880000;
+        cursor: pointer;
+
+        > div.button {
+          width: 1.5rem;
+          height: 1.5rem;
+          border-radius: 1.5rem;
+          background-color: red;
+          position: absolute;
+          top: 0.25rem;
+          left: 0.25rem;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 12px;
+
+          &:active {
+            background-color: #9C3F3F;
+          }
+        }
+      }
+
+      > div.indicator {
+        height: 10px;
+        width: 10px;
+        border-radius: 5px;
+        margin: calc(0.5rem + 2.5px);
+      }
+    }
+  }
+
+  > section.relays {
+    display: flex;
+    flex: 0 0 auto;
+
+    > div.relay {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border: 3px solid black;
+      width: 2rem;
+      height: 4rem;
+      margin: 1rem;
+
+      font-weight: bold;
+
+      &:after {
+        content: '';
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        height: 10px;
+        width: 10px;
+        border-radius: 5px;
+      }
+
+      &.off {
+        &:after {
+          background-color: gray;
+        }
+      }
+      
+      &.on {
+        &:after {
+          background-color: red;
+        }
+      }
+    }
+  }
+}
