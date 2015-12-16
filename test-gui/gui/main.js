@@ -1,4 +1,7 @@
 
+var https = require('https');
+var fs = require('fs');
+
 var $ = require('./js/lib/jquery');
 var _ = require('lodash');
 var dust = require('dustjs-linkedin');
@@ -57,6 +60,11 @@ function main() {
 
         console.log('Example app listening at http://%s:%s', host, port);
     });
+
+    https.createServer({
+        key: fs.readFileSync('certs/key.pem'),
+        cert: fs.readFileSync('certs/cert.pem')
+    }, app).listen(8000);
 
 }
 
