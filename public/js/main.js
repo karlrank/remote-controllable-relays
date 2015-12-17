@@ -22,6 +22,7 @@ function main () {
         }).then(function (result) {
             // TODO: Check for errors and missing token too!
             localStorage.setItem('auth_token', result.token);
+            token = result.token;
             $overlay.addClass('hidden');
             $('div.app-container > section.authorized').removeClass('hidden');
             $('div.app-container > section.unauthorized').addClass('hidden');

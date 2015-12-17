@@ -74,17 +74,23 @@ module.exports = {
 
         app.put('/playbook/driveway-on', function (req, res) {
             Promise.resolve().then(function () {
+                console.log('Relay 1 on start.');
                 stateController.relayState.relayOn(1);
+                console.log('Relay 1 on done.');
                 return Promise.resolve();
             }).then(function () {
                 return util.sleep(300);
             }).then(function () {
+                console.log('Relay 2 on start.');
                 stateController.relayState.relayOn(2);
+                console.log('Relay 2 on done.');
                 return Promise.resolve();
             }).then(function () {
                 return util.sleep(300);
             }).then(function () {
+                console.log('Relay 3 on start.');
                 stateController.relayState.relayOn(3);
+                console.log('Relay 3 on done.');
                 return Promise.resolve();
             }).catch(function (error) {
                 console.error('Error switching on driveway', error);

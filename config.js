@@ -1,4 +1,8 @@
 
+var dnsUpdateToken = 'afce7101-aaf4-40ea-86ca-302a8507d1d8',
+    dnsDomainName = 'kadarpiku',
+    dnsUpdateUrl = `https://www.duckdns.org/update?domains=${dnsDomainName}&token=${dnsUpdateToken}&ip=`;
+
 module.exports = {
 
     relayCount: 6,
@@ -15,5 +19,8 @@ module.exports = {
     relayLatchPin: 7,
     switchPLPin: 11,
     switchCEPin: 13,
-    switchOEPin: 12
+    switchOEPin: 12,
+
+    dnsUpdateInterval: 5 * 60 * 1000,
+    dnsUpdateUrl: dnsUpdateUrl
 };

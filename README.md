@@ -2,7 +2,7 @@
 
 # Getting sqlite3 and electron to behave nicely
 
-Commands to build 
+Commands to build
 ```
 cd node_modules/sqlite3
 npm run prepublish

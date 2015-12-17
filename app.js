@@ -1,9 +1,15 @@
+
+"use strict";
+
+var fs = require('fs');
+var https = require('https');
 var crypto = require('crypto');
 
 var RelayState = require('./modules/RelayState');
 var SwitchState = require('./modules/SwitchState');
 var StateReaderWriter = require('./modules/StateReaderWriter');
 var StateController  = require('./modules/StateController');
+var DuckDnsUpdater = require('./modules/DuckDnsUpdater');
 var config = require('./config');
 
 
@@ -30,3 +36,10 @@ var server = app.listen(3000, function () {
 
     console.log('Example app listening at http://%s:%s', host, port);
 });
+
+https.createServer({
+    key: fs.readFileSync('certs/key.pem'),
+    cert: fs.readFileSync('certs/cert.pem')
+}, app).listen(8000);
+
+new DuckDnsUpdater().run();

@@ -10,6 +10,7 @@ var config = require('../../config');
 var helper = require('./js/helper');
 var RelayState = require('../../modules/RelayState');
 var SwitchState = require('../../modules/SwitchState');
+var DuckDnsUpdater = require('../../modules/DuckDnsUpdater');
 var StateController = require('../../modules/StateController');
 var GuiStateReaderWriter = require('./js/GuiStateReaderWriter');
 var ConsoleLogStream = require('./js/ConsoleLogStream');
@@ -65,6 +66,8 @@ function main() {
         key: fs.readFileSync('certs/key.pem'),
         cert: fs.readFileSync('certs/cert.pem')
     }, app).listen(8000);
+
+    new DuckDnsUpdater().run();
 
 }
 
