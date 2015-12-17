@@ -1,5 +1,8 @@
 var crypto = require('crypto');
 
+var RelayState = require('./modules/RelayState');
+var SwitchState = require('./modules/SwitchState');
+var StateReaderWriter = require('./modules/StateReaderWriter');
 var StateController  = require('./modules/StateController');
 var config = require('./config');
 
