@@ -6,6 +6,8 @@ var EventEmitter = require('events').EventEmitter;
 var gpio = require('rpi-gpio');
 var SPI = require('pi-spi');
 
+var util = require('../util/util');
+
 
 function writePin (pinNr, value) {
     return new Promise(function (resolve, reject) {
@@ -40,6 +42,7 @@ class StateReaderWriter extends EventEmitter {
         var self = this;
         this.relayState = relayState;
         this.switchState = switchState;
+        this.statusLed = false;
 
         this.IOOptions = IOOptions;
         this.spi = SPI.initialize(IOOptions.SPIPort);
@@ -47,7 +50,8 @@ class StateReaderWriter extends EventEmitter {
             StateReaderWriter.setupPin(IOOptions.relayLatchPin),
             StateReaderWriter.setupPin(IOOptions.switchPLPin),
             StateReaderWriter.setupPin(IOOptions.switchCEPin),
-            StateReaderWriter.setupPin(IOOptions.switchOEPin)
+            StateReaderWriter.setupPin(IOOptions.switchOEPin),
+            StateReaderWriter.setupPin(IOOptions.statusLEDPin)
         ]).then(function () {
             self.ready = true;
             self.emit('ready');
@@ -68,6 +72,46 @@ class StateReaderWriter extends EventEmitter {
                 resolve();
             });
         });
+    }
+
+    statusLEDOn () {
+        this.statusLed = true;
+        return writePin(this.IOOptions.statusLEDPin, true);
+    }
+
+    statusLEDOff () {
+        this.statusLed = false;
+        return writePin(this.IOOptions.statusLEDPin, false);
+    }
+
+    startBlinkingStatusLed () {
+        this.statusLEDBlinking = true;
+        this._blinkStatusLED();
+    }
+
+    stopBlinkingStatusLed () {
+        this.statusLEDBlinking = false;
+    }
+
+    _blinkStatusLED () {
+        var self = this;
+        if (this.statusLEDBlinking) {
+            if (this.statusLed) {
+                this.statusLEDOff().then(function () {
+                    return util.sleep(250);
+                }).then(function () {
+                    self._blinkStatusLED();
+                });
+            } else {
+                this.statusLEDOn().then(function () {
+                    return util.sleep(250);
+                }).then(function () {
+                    self._blinkStatusLED();
+                });
+            }
+        } else {
+            this.statusLEDOn();
+        }
     }
 
     _sync () {

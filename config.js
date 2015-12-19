@@ -20,6 +20,7 @@ module.exports = {
     switchPLPin: 11,
     switchCEPin: 13,
     switchOEPin: 12,
+    statusLEDPin: 16,
 
     dnsUpdateInterval: 5 * 60 * 1000,
     dnsUpdateUrl: dnsUpdateUrl

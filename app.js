@@ -13,6 +13,9 @@ var DuckDnsUpdater = require('./modules/DuckDnsUpdater');
 var config = require('./config');
 
 
+process.chdir(__dirname);
+
+
 var stateReaderWriter = new StateReaderWriter(
     new RelayState(config.relayCount),
     new SwitchState(config.switchCount),
@@ -21,7 +24,8 @@ var stateReaderWriter = new StateReaderWriter(
         relayLatchPin: config.relayLatchPin,
         switchPLPin: config.switchPLPin,
         switchCEPin: config.switchCEPin,
-        switchOEPin: config.switchOEPin
+        switchOEPin: config.switchOEPin,
+        statusLEDPin: config.statusLEDPin
     }
 );
 

@@ -23,6 +23,22 @@ class StateReaderWriter extends EventEmitter {
         self.emit('ready');
     }
 
+    statusLEDOn () {
+        return Promise.resolve();
+    }
+
+    statusLEDOff () {
+        return Promise.resolve();
+    }
+
+    startBlinkingStatusLed () {
+
+    }
+
+    stopBlinkingStatusLed () {
+
+    }
+
     _sync () {
         var self = this;
         return new Promise(function (resolve, reject) {
