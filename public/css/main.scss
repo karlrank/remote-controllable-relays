@@ -21,6 +21,29 @@ div.app-container {
 
     > button {
       flex: 1 1 auto;
+      border: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    > button[data-playbook="driveway-on"] {
+      color: white;
+      background-color: #D0B918;
+
+      &:active {
+        background-color: #A2921B;
+      }
+    }
+
+    > button[data-playbook="driveway-off"] {
+      background-color: #AFAFAF;
+      border-top: 2px solid black;
+
+      &:active {
+        background-color: #D4D3D3;
+      }
     }
   }
 }

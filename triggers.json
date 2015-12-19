@@ -1,0 +1,24 @@
+[
+  {
+    "switch": 1,
+    "mode": "press",
+    "actions": [
+      {
+        "condition": {
+          "key": "relayState",
+          "keyArgument": 1,
+          "value": true
+        },
+        "action": "driveway-off"
+      },
+      {
+        "condition": {
+          "key": "relayState",
+          "keyArgument": 1,
+          "value": false
+        },
+        "action": "driveway-on"
+      }
+    ]
+  }
+]

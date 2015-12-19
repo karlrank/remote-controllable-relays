@@ -1,0 +1,44 @@
+{
+  "driveway-on": {
+    "relaysUsed": [1, 2, 3],
+    "steps": [
+      {
+        "action": "relayOn",
+        "argument": 1
+      },
+      {
+        "action": "sleep",
+        "argument": 300
+      },
+      {
+        "action": "relayOn",
+        "argument": 2
+      },
+      {
+        "action": "sleep",
+        "argument": 300
+      },
+      {
+        "action": "relayOn",
+        "argument": 3
+      }
+    ]
+  },
+  "driveway-off": {
+    "relaysUsed": [1, 2, 3],
+    "steps": [
+      {
+        "action": "relayOff",
+        "argument": 1
+      },
+      {
+        "action": "relayOff",
+        "argument": 2
+      },
+      {
+        "action": "relayOff",
+        "argument": 3
+      }
+    ]
+  }
+}

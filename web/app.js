@@ -1,6 +1,7 @@
 
 var express = require('express');
 var morgan = require('morgan');
+var bodyParser = require('body-parser')
 
 var StateController  = require('../modules/StateController');
 var util = require('../util/util');
@@ -14,6 +15,8 @@ module.exports = {
         app.use(morgan('short', {
             stream: outStream
         }));
+
+        app.use(bodyParser.json())
 
         app.use(express.static('public'));
 
@@ -72,38 +75,13 @@ module.exports = {
             });
         });
 
-        app.put('/playbook/driveway-on', function (req, res) {
-            Promise.resolve().then(function () {
-                console.log('Relay 1 on start.');
-                stateController.relayState.relayOn(1);
-                console.log('Relay 1 on done.');
-                return Promise.resolve();
-            }).then(function () {
-                return util.sleep(300);
-            }).then(function () {
-                console.log('Relay 2 on start.');
-                stateController.relayState.relayOn(2);
-                console.log('Relay 2 on done.');
-                return Promise.resolve();
-            }).then(function () {
-                return util.sleep(300);
-            }).then(function () {
-                console.log('Relay 3 on start.');
-                stateController.relayState.relayOn(3);
-                console.log('Relay 3 on done.');
-                return Promise.resolve();
-            }).catch(function (error) {
-                console.error('Error switching on driveway', error);
-                res.sendStatus(500);
-            });
-            res.json({status: 'Done.'});
-        });
-
-        app.put('/playbook/driveway-off', function (req, res) {
-            stateController.relayState.relayOff(1);
-            stateController.relayState.relayOff(2);
-            stateController.relayState.relayOff(3);
-            res.json({status: 'Done.'});
+        app.put('/playbook/', function (req, res) {
+            if (!req.body.playbook) {
+                res.sendStatus(400).send('Missing playbook name from json body');
+            } else {
+                stateController.runPlaybook(req.body.playbook);
+                res.json({status: 'Done.'});
+            }
         });
 
         return app;

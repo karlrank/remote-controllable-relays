@@ -37,10 +37,12 @@ function main () {
         var playbook = $target.data('playbook');
 
         $.ajax({
-            url: 'playbook/' + playbook,
+            url: 'playbook/',
             type: 'PUT',
+            data: JSON.stringify({playbook: playbook}),
             cache: false,
             dataType: 'json',
+            contentType: 'application/json',
             beforeSend: function(xhr) {
                 if (token) {
                     xhr.setRequestHeader('Authorization', 'token ' + token);

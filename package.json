@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "test-gui/main.js",
   "dependencies": {
+    "body-parser": "1.14.2",
     "dustjs-linkedin": "2.7.2",
     "express": "4.13.3",
     "lodash": "3.10.1",
