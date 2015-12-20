@@ -53,6 +53,13 @@ class StateReaderWriter extends EventEmitter {
             StateReaderWriter.setupPin(IOOptions.switchOEPin),
             StateReaderWriter.setupPin(IOOptions.statusLEDPin)
         ]).then(function () {
+            // Write a zero buffer so that the shift arrays would be initialized into a known safe state
+            var zeroBuffer = new Buffer(Math.ceil(Math.max(self.relayState.count, self.switchState.count) / 8));
+            for (var i = 0; i < zeroBuffer.length; i++) {
+                zeroBuffer.writeInt8(0, i);
+            }
+            return transfer(self.spi, zeroBuffer);
+        }).then(function () {
             self.ready = true;
             self.emit('ready');
         }).catch(function (error) {
