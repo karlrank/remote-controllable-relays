@@ -8,13 +8,14 @@
 </head>
 <body>
     <div class="app-container">
+        <section class="status"></section>
         <section class="authorized hidden">
             <button class="run-playbook" data-playbook="driveway-on">Driveway on</button>
             <button class="run-playbook" data-playbook="driveway-off">Driveway off</button>
         </section>
         <section class="unauthorized hidden">
             <h1>Missing authorization!</h1>
-            <p>Press button to start the authorization process. After starting the process the authorize button must be pressed in 60s on the device.</p>
+            <p>Press button to start the authorization process. After starting the process the authorize button must be pressed within 60s on the device.</p>
             <button class="authorize">Authorize</button>
         </section>
     </div>

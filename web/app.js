@@ -70,11 +70,11 @@ module.exports = {
                 if (verificationResult) {
                     next()
                 } else {
-                    res.status(500).send('Invalid token.');
+                    res.status(401).send('Invalid token.');
                 }
             }).catch(function (error) {
                 console.error('Error verifying token', error);
-                res.sendStatus(500);
+                res.sendStatus(401);
             });
         });
 

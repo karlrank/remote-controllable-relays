@@ -14,6 +14,19 @@ html, body , div.app-container {
 }
 
 div.app-container {
+  display: flex;
+  flex-direction: column;
+
+  > section.status {
+    &.error {
+      color: red;
+    }
+
+    &.success {
+      color: green;
+    }
+  }
+
   > section.authorized {
     display: flex;
     flex-direction: column;
